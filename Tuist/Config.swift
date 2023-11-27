@@ -2,6 +2,8 @@ import ProjectDescription
 
 let config = Config(
     plugins: [
-        .local(path: .relativeToManifest("../../Plugins/MmTalkShopping")),
+        .local(path: .relativeToRoot("Plugin/EnvironmentPlugin")),
+        .local(path: .relativeToRoot("Plugin/DependencyPlugin")),
+        .local(path: .relativeToRoot("Plugin/ConfigurationPlugin"))
     ]
 )
