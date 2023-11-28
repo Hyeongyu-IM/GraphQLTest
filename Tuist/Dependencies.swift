@@ -6,7 +6,6 @@
 //
 
 import ProjectDescription
-import ConfigurationPlugin
 import DependencyPlugin
 
 let dependencies = Dependencies(
@@ -19,9 +18,8 @@ let dependencies = Dependencies(
                 .Nimble
             ],
             baseSettings: .settings(configurations: [
-                .debug(name: .Debug),
-                .debug(name: .Dev),
-                .release(name: .Release)
+                .debug(name: .debug),
+                .release(name: .release)
             ])
         )
     )

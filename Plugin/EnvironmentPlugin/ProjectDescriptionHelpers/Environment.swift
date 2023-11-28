@@ -7,13 +7,19 @@
 
 import ProjectDescription
 
-public extension Project {
-    enum Environment {
-        public static let appName: String = "mmTalkShopping"
-        public static let appVersion: String = "1.0.0"
-        public static let bundlePrefix = "com.hyeongyu.mmTalkShopping"
-        public static let deploymentTarget: DeploymentTarget = .iOS(targetVersion: "14.0",
-                                                                    devices: [.iphone, .ipad])
-        public static let platform = Platform.iOS
-    }
+public struct ProjectEnvironment {
+    public let name: String
+    public let appVersion: String
+    public let bundlePrefix: String
+    public let deploymentTarget: DeploymentTarget
+    public let platform: Platform
 }
+
+public let env = ProjectEnvironment(
+    name: "mmTalkShopping",
+    appVersion: "1.0.0",
+    bundlePrefix: "com.hyeongyu",
+    deploymentTarget: .iOS(targetVersion: "14.0",
+                           devices: [.iphone, .ipad]),
+    platform: .iOS
+)

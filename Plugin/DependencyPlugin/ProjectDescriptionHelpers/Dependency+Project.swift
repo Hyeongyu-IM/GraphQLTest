@@ -15,6 +15,9 @@ public extension TargetDependency {
 public extension TargetDependency.SPM {
     static let Kingfisher = TargetDependency.external(name: "Kingfisher")
     static let SnapKit = TargetDependency.external(name: "SnapKit")
+    
+    static let Quick = TargetDependency.external(name: "Quick")
+    static let Nimble = TargetDependency.external(name: "Nimble")
 }
 
 public extension Package {
