@@ -1,39 +1,26 @@
 //
 //  Dependency+Project.swift
-//  ConfigurationPlugin
+//  DependencyPlugin
 //
-//  Created by 임현규 on 11/27/23.
+//  Created by 임현규 on 11/28/23.
 //
 
-import Foundation
 import ProjectDescription
 
-public extension TargetDependency {
-    struct SPM {}
+public typealias Dep = TargetDependency
+
+extension Dep {
+    public struct Modules { }
 }
 
-public extension TargetDependency.SPM {
-    static let Kingfisher = TargetDependency.external(name: "Kingfisher")
-    static let SnapKit = TargetDependency.external(name: "SnapKit")
+public extension Dep {
+    static let Data = Dep.project(target: "Data", path: .Data)
     
-    static let Quick = TargetDependency.external(name: "Quick")
-    static let Nimble = TargetDependency.external(name: "Nimble")
-}
-
-public extension Package {
-    //MARK: -- UI
-    static let SnapKit = Package.remote(url: "https://github.com/SnapKit/SnapKit.git",
-                                        requirement: .upToNextMajor(from: "5.6.0"))
-    static let Kingfisher = Package.remote(url: "https://github.com/onevcat/Kingfisher.git",
-                                           requirement: .upToNextMajor(from: "7.9.1"))
+    static let Domain = Dep.project(target: "Domain", path: .Domain)
     
-    //MARK: -- Util
-    static let Then = Package.remote(url: "https://github.com/devxoul/Then.git",
-                                     requirement: .upToNextMajor(from: "2.7.0"))
+    static let Core = Dep.project(target: "Core", path: .Core)
     
-    //MARK: -- Test
-    static let Quick = Package.remote(url: "https://github.com/Quick/Quick",
-                                      requirement: .upToNextMajor(from: "7.3.0"))
-    static let Nimble = Package.remote(url: "https://github.com/Quick/Nimble",
-                                       requirement: .upToNextMajor(from: "13.0.0"))
+    static let Networks = Dep.project(target: "Networks", path: .Networks)
+    
+    static let ThirdPartyLibs = Dep.project(target: "ThirdPartyLibs", path: .ThirdPartyLibs)
 }

@@ -8,24 +8,28 @@
 import ProjectDescription
 
 public extension ProjectDescription.Path {
-    static var app: Self {
+    static var App: Self {
         return .relativeToRoot("Projects/App")
     }
     
-    static var data: Self {
+    static var Data: Self {
         return .relativeToRoot("Projects/Data")
     }
     
-    static var domain: Self {
+    static var Domain: Self {
         return .relativeToRoot("Projects/Domain")
     }
     
-    static var core: Self {
+    static var Core: Self {
         return .relativeToRoot("Projects/Core")
     }
     
-    static var thirdPartyLibs: Self {
+    static var ThirdPartyLibs: Self {
         return .relativeToRoot("Projects/ThirdPartyLibs")
+    }
+    
+    static var Networks: Self {
+        return .relativeToRoot("Projects/Networks")
     }
 }
 

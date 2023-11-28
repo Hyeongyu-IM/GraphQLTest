@@ -8,30 +8,25 @@
 import ProjectDescription
 import Foundation
 
-private let layerAttribute = Template.Attribute.required("layer")
-private let nameAttribute = Template.Attribute.optional("name", default: "")
-private let targetAttribute = Template.Attribute.required("target")
+let moduleAttribute = Template.Attribute.required("name")
 
-private let template = Template(
-    description: "A template for a new module",
-    attributes: [
-        layerAttribute,
-        nameAttribute,
-        targetAttribute
-    ],
+let moduleTemplate = Template(
+    description: "Module Template",
+    attributes: [moduleAttribute, .optional("platform", default: "iOS")],
     items: [
-        .file(
-            path: "Projects/\(layerAttribute)/\(nameAttribute)/Sources/Source.swift",
-            templatePath: "Sources.stencil"
-        ),
-        .file(
-            path: "Projects/\(layerAttribute)/\(nameAttribute)/Project.swift",
-            templatePath: "Project.stencil"
-        ),
-        .file(
-          path: "Projects/\(layerAttribute)/\(nameAttribute)/Tests/\(nameAttribute)Test.swift",
-          templatePath: "UnitTest.stencil"
-        )
-    ]
+        //Project
+        [
+            .file(path: "Projects/\(moduleAttribute)/Project.swift",
+                  templatePath: "Project.stencil")
+        ],
+        //Test
+        [
+            .file(path: "Projects/\(moduleAttribute)/Tests/Sources/\(moduleAttribute)Tests.swift", templatePath: "Tests.stencil"),
+        ],
+        //Framework
+        [
+            .file(path: "Projects/\(moduleAttribute)/Sources/\(moduleAttribute).swift", templatePath: "Framework.stencil"),
+            .string(path: "Projects/\(moduleAttribute)/Resources/dummy.txt", contents: "_")
+        ]
+    ].flatMap { $0 }
 )
-

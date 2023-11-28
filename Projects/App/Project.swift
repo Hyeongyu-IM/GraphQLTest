@@ -8,6 +8,6 @@ import DependencyPlugin
 let project = Project.makeModule(name: env.name,
                                  targets: [.app, .unitTest],
                                  internalDependencies: [
-//                                    .data
+                                    .Data
                                  ]
 )
