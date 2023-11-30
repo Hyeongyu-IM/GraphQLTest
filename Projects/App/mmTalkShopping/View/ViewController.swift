@@ -7,11 +7,17 @@
 
 import UIKit
 
+import Core
+import Domain
+import Networks
+
 class ViewController: UIViewController {
+    private let network = NetworkService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        network.fetchProductList()
     }
 
 

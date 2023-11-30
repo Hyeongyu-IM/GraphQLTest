@@ -15,9 +15,12 @@ let dependencies = Dependencies(
                 .Kingfisher,
                 .Then,
                 .Apollo,
-                .ApolloAPI,
+                .GraphQLAPI,
                 .Quick,
                 .Nimble
+            ],
+            productTypes: [
+                "GraphQLAPI" : .framework
             ],
             baseSettings: .settings(configurations: [
                 .debug(name: .debug),

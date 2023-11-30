@@ -48,7 +48,7 @@ public extension Project {
                 product: .app,
                 bundleId: "\(env.bundlePrefix).\(name)",
                 deploymentTarget: env.deploymentTarget,
-                infoPlist: .default,
+                infoPlist: .extendingDefault(with: infoPlistValues),
                 sources: ["mmTalkShopping/**/*.swift"],
                 resources: [
                     "mmTalkShopping/Reference/**"

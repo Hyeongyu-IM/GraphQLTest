@@ -5,11 +5,11 @@ import DependencyPlugin
 let project = Project.makeModule(
     name: "ThirdPartyLibs",
     targets: [.dynamicFramework],
-    internalDependencies: [
+    externalDependencies: [
         .SPM.Kingfisher,
         .SPM.SnapKit,
         .SPM.Then,
         .SPM.Apollo,
-        .SPM.ApolloAPI
+        .SPM.GraphQLAPI
     ]
 )

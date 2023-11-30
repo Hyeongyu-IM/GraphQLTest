@@ -17,7 +17,7 @@ public extension TargetDependency.SPM {
     static let Kingfisher = TargetDependency.external(name: "Kingfisher")
     static let Then = TargetDependency.external(name: "Then")
     static let Apollo = TargetDependency.external(name: "Apollo")
-    static let ApolloAPI = TargetDependency.external(name: "ApolloAPI")
+    static let GraphQLAPI = TargetDependency.external(name: "GraphQLAPI")
     
     //MARK: -- UnitTest Only
     static let Quick = TargetDependency.external(name: "Quick")
@@ -40,7 +40,7 @@ public extension Package {
                                        requirement: .upToNextMajor(from: "1.7.1"))
     
     //MARK: -- CodeGen
-    static let ApolloAPI = Package.local(path: .relativeToRoot("Projects/GraphQLAPI"))
+    static let GraphQLAPI = Package.local(path: .relativeToRoot("SPM/GraphQLAPI"))
     
     //MARK: -- Test
     static let Quick = Package.remote(url: "https://github.com/Quick/Quick",
