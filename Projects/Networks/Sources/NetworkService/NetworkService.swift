@@ -8,19 +8,36 @@
 
 import Foundation
 
+import Core
+
 import Apollo
 import GraphQLAPI
 
 public final class NetworkService {
-    private(set) var apollo = AuthApolloClient.apolloClientWithIntercepter
-    
-    var product: ProductQuery.Data.Product?
+    private(set) lazy var client: ApolloClient = {
+        let cache = InMemoryNormalizedCache()
+        let store = ApolloStore(cache: cache)
+        
+        let client = URLSessionClient()
+        let provider = NetworkInterceptorProvider(store: store, client: client)
+        let baseURL: URL = URL(string: .graphQLURLString)!
+        
+        let requestChainTransport = RequestChainNetworkTransport(
+            interceptorProvider: provider,
+            endpointURL: baseURL
+        )
+        
+        return ApolloClient(networkTransport: requestChainTransport, store: store)
+    }()
     
     public init() { }
     
+    
+    var product: ProductQuery.Data.Product?
+    
     public func fetchProductList() {
         let query = ProductQuery(hash: "73BC8649785CC47660AE5DC3B802CDA6")
-        apollo.fetch(query: query) { result in
+        client.fetch(query: query) { result in
             switch result {
             case .success(let value):
                 self.product = value.data?.product
