@@ -1,0 +1,24 @@
+
+query Products($listOptions: ProductListOptions!) {
+  products(listOptions: $listOptions) {
+    meta {
+      offset
+      limit
+      isFinal
+    }
+    products {
+      hash
+      brand
+      name
+      sellPrc
+      normalPrc
+      discountRate
+      imgUrl
+      reviewAvg
+      reviewCount
+      tags
+      soldOut
+    }
+  }
+}
+

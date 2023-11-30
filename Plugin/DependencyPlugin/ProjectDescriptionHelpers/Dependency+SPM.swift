@@ -13,10 +13,13 @@ public extension TargetDependency {
 }
 
 public extension TargetDependency.SPM {
-    static let Kingfisher = TargetDependency.external(name: "Kingfisher")
     static let SnapKit = TargetDependency.external(name: "SnapKit")
+    static let Kingfisher = TargetDependency.external(name: "Kingfisher")
     static let Then = TargetDependency.external(name: "Then")
+    static let Apollo = TargetDependency.external(name: "Apollo")
+    static let ApolloAPI = TargetDependency.external(name: "ApolloAPI")
     
+    //MARK: -- UnitTest Only
     static let Quick = TargetDependency.external(name: "Quick")
     static let Nimble = TargetDependency.external(name: "Nimble")
 }
@@ -31,6 +34,13 @@ public extension Package {
     //MARK: -- Util
     static let Then = Package.remote(url: "https://github.com/devxoul/Then.git",
                                      requirement: .upToNextMajor(from: "2.7.0"))
+    
+    //MARK: -- Network
+    static let Apollo = Package.remote(url: "https://github.com/apollographql/apollo-ios",
+                                       requirement: .upToNextMajor(from: "1.7.1"))
+    
+    //MARK: -- CodeGen
+    static let ApolloAPI = Package.local(path: .relativeToRoot("Projects/GraphQLAPI"))
     
     //MARK: -- Test
     static let Quick = Package.remote(url: "https://github.com/Quick/Quick",

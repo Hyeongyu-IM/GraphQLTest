@@ -8,6 +8,8 @@ let project = Project.makeModule(
     internalDependencies: [
         .SPM.Kingfisher,
         .SPM.SnapKit,
-        .SPM.Then
+        .SPM.Then,
+        .SPM.Apollo,
+        .SPM.ApolloAPI
     ]
 )

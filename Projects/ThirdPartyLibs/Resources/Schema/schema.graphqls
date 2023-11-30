@@ -1,0 +1,66 @@
+type CursorMetaDto {
+  """현재 요청 offset"""
+  offset: Int!
+
+  """현재 요청 limit"""
+  limit: Int!
+
+  """마지막 페이지 여부"""
+  isFinal: Boolean!
+}
+
+type Product {
+  """상품ID (Hash) 상품 상세화면 이동시 사용"""
+  hash: ID!
+
+  """상품명"""
+  name: String!
+
+  """브랜드명"""
+  brand: String
+
+  """판매 가격"""
+  sellPrc: Float!
+
+  """판매 정가"""
+  normalPrc: Float!
+
+  """상품 이미지 주소"""
+  imgUrl: String
+
+  """리뷰 수"""
+  reviewCount: Int!
+
+  """리뷰 점수"""
+  reviewAvg: Float!
+
+  """할인율"""
+  discountRate: Int!
+
+  """태그 Labels (BEST : 베스트, FREE_DELIVERY : 무료배송)"""
+  tags: [String!]
+
+  """품절 여부"""
+  soldOut: Boolean!
+}
+
+type ProductList {
+  """pagination meta 정보"""
+  meta: CursorMetaDto!
+
+  """상품 목록"""
+  products: [Product!]!
+}
+
+input ProductListOptions {
+  """pagination offset"""
+  offset: Int!
+
+  """pagination limit (min : 20, max : 100)"""
+  limit: Int!
+}
+
+type Query {
+  product(hash: String!): Product!
+  products(listOptions: ProductListOptions!): ProductList!
+}

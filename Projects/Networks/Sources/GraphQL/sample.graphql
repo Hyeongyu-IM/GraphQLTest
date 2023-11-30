@@ -1,0 +1,15 @@
+query Product($hash: String!) {
+  product(hash: $hash) {
+      hash
+      brand
+      name
+      sellPrc
+      normalPrc
+      discountRate
+      imgUrl
+      reviewAvg
+      reviewCount
+      tags
+      soldOut
+  }
+}

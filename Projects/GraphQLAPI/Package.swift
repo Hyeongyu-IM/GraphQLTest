@@ -1,0 +1,25 @@
+// swift-tools-version:5.7
+
+import PackageDescription
+
+let package = Package(
+  name: "GraphQLAPI",
+  platforms: [
+    .iOS(.v12)
+  ],
+  products: [
+    .library(name: "GraphQLAPI", targets: ["GraphQLAPI"]),
+  ],
+  dependencies: [
+    .package(url: "https://github.com/apollographql/apollo-ios.git", from: "1.0.0"),
+  ],
+  targets: [
+    .target(
+      name: "GraphQLAPI",
+      dependencies: [
+        .product(name: "ApolloAPI", package: "apollo-ios"),
+      ],
+      path: "./Sources"
+    ),
+  ]
+)

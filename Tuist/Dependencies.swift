@@ -14,6 +14,8 @@ let dependencies = Dependencies(
                 .SnapKit,
                 .Kingfisher,
                 .Then,
+                .Apollo,
+                .ApolloAPI,
                 .Quick,
                 .Nimble
             ],
