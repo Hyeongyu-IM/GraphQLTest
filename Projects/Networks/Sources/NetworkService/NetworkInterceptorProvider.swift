@@ -27,7 +27,7 @@ struct NetworkInterceptorProvider: InterceptorProvider {
     return [
         MaxRetryInterceptor(),
         CacheReadInterceptor(store: self.store),
-        AuthorizationInterceptor(), //✅
+        AuthorizationInterceptor(),
         NetworkFetchInterceptor(client: self.client),
         ResponseCodeInterceptor(),
         JSONResponseParsingInterceptor(),

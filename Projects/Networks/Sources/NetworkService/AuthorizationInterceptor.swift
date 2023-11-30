@@ -14,11 +14,7 @@ import Apollo
 import ApolloAPI
 
 final class AuthorizationInterceptor: ApolloInterceptor {
-    var id: String
-
-    init(id: String = "AuthorizationInterceptor") {
-        self.id = id
-    }
+    var id: String = UUID().uuidString
     
     func interceptAsync<Operation: GraphQLOperation>(
         chain: RequestChain,

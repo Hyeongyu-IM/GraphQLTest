@@ -32,7 +32,6 @@ public final class NetworkService {
     
     public init() { }
     
-    
     var product: ProductQuery.Data.Product?
     
     public func fetchProductList() {
