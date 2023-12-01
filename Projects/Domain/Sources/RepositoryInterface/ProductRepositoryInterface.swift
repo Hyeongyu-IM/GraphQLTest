@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+import Combine
+import GraphQLAPI
+
+public protocol LebbarMarketRepositoryInterface: AnyObject {
+    func fetchProduct(hash: String) -> AnyPublisher<ProductModel, Error>
+    func fetchProductList(listOption: ProductListOptions) -> AnyPublisher<ProductListModel, Error>
+}
