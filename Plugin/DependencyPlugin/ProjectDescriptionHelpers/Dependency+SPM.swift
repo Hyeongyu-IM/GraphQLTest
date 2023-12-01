@@ -18,6 +18,7 @@ public extension TargetDependency.SPM {
     static let Then = TargetDependency.external(name: "Then")
     static let Apollo = TargetDependency.external(name: "Apollo")
     static let GraphQLAPI = TargetDependency.external(name: "GraphQLAPI")
+    static let GraphQLAPIMock = TargetDependency.external(name: "GraphQLAPIMock")
     
     //MARK: -- UnitTest Only
     static let Quick = TargetDependency.external(name: "Quick")

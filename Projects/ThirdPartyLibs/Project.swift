@@ -10,6 +10,7 @@ let project = Project.makeModule(
         .SPM.SnapKit,
         .SPM.Then,
         .SPM.Apollo,
-        .SPM.GraphQLAPI
+        .SPM.GraphQLAPI,
+        .SPM.GraphQLAPIMock
     ]
 )

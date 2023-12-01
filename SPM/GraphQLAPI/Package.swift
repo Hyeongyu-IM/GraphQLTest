@@ -5,10 +5,14 @@ import PackageDescription
 let package = Package(
   name: "GraphQLAPI",
   platforms: [
-    .iOS(.v12)
+    .iOS(.v12),
+    .macOS(.v10_14),
+    .tvOS(.v12),
+    .watchOS(.v5),
   ],
   products: [
     .library(name: "GraphQLAPI", targets: ["GraphQLAPI"]),
+    .library(name: "GraphQLAPIMock", targets: ["GraphQLAPIMock"]),
   ],
   dependencies: [
     .package(url: "https://github.com/apollographql/apollo-ios.git", from: "1.0.0"),
@@ -20,6 +24,14 @@ let package = Package(
         .product(name: "ApolloAPI", package: "apollo-ios"),
       ],
       path: "./Sources"
+    ),
+    .target(
+      name: "GraphQLAPIMock",
+      dependencies: [
+        .product(name: "ApolloTestSupport", package: "apollo-ios"),
+        .target(name: "GraphQLAPI"),
+      ],
+      path: "./GraphQLAPIMock"
     ),
   ]
 )

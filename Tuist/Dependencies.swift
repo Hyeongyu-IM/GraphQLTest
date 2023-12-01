@@ -20,7 +20,8 @@ let dependencies = Dependencies(
                 .Nimble
             ],
             productTypes: [
-                "GraphQLAPI" : .framework
+                "GraphQLAPI" : .framework,
+                "GraphQLAPIMock" : .framework
             ],
             baseSettings: .settings(configurations: [
                 .debug(name: .debug),
