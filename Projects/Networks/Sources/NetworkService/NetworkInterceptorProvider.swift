@@ -33,7 +33,6 @@ struct NetworkInterceptorProvider: InterceptorProvider {
         JSONResponseParsingInterceptor(),
         AutomaticPersistedQueryInterceptor(),
         CacheWriteInterceptor(store: self.store),
-        
     ]
   }
 }

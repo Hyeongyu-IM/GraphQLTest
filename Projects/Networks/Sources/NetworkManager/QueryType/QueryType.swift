@@ -9,11 +9,10 @@
 import Foundation
 
 import GraphQLAPI
+import GraphQLAPIMock
+import ApolloTestSupport
 
-public protocol QueryType {
-    var sampleData: Data { get }
-}
-
-public extension QueryType {
-    var sampleData: Data { Data() }
+public protocol QueryType: GraphQLQuery {
+    associatedtype QueryDataType
+    var sampleData: QueryDataType { get }
 }

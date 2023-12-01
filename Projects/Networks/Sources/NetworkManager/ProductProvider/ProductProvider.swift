@@ -16,6 +16,8 @@ import GraphQLAPI
 public final class ProductProvider: ProductProviderInterface {
     private let network: NetworkService = .init()
     
+    public init() {}
+    
     public func fetchProduct(hash: String) -> Publishers.ApolloFetch<ProductQuery> {
         return network.client.fetchPublisher(query: ProductQuery(hash: hash))
     }

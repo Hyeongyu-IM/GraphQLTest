@@ -15,5 +15,5 @@ import GraphQLAPI
 
 public protocol ProductProviderInterface {
     func fetchProduct(hash: String) -> Publishers.ApolloFetch<ProductQuery>
-    func fetchProductList(hash: String) -> Publishers.ApolloFetch<ProductsQuery>
+    func fetchProductList(listOption: ProductListOptions) -> Publishers.ApolloFetch<ProductsQuery>
 }
