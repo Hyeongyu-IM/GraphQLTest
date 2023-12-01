@@ -12,6 +12,8 @@ import Apollo
 import Combine
 import Foundation
 
+import GraphQLAPI
+
 #if canImport(ApolloAPI)
 import ApolloAPI
 #endif
