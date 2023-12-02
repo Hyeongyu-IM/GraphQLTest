@@ -9,7 +9,18 @@
 import Foundation
 
 //MARK: Entity -- Product
-public struct ProductModel {
+public struct ProductModel: Hashable {
+    public enum Tag: String {
+        case BEST
+        case FREE_DELIVERY
+        
+        public var title: String {
+            switch self {
+            case .BEST: return "베스트"
+            case .FREE_DELIVERY: return "무료배송"
+            }
+        }
+    }
     /// 상품ID (Hash) 상품 상세화면 이동시 사용
     public var hash: String
     /// 브랜드명
@@ -32,6 +43,13 @@ public struct ProductModel {
     public var tags: [String]?
     /// 품절 여부
     public var soldOut: Bool
+    
+    public var tagList: [Tag] {
+        if let tags {
+            return tags.compactMap(Tag.init)
+        }
+        return []
+    }
     
     public init(hash: String, brand: String? = nil, name: String, sellPrc: Double, normalPrc: Double, discountRate: Int, imgUrl: String? = nil, reviewAvg: Double, reviewCount: Int, tags: [String]? = nil, soldOut: Bool) {
         self.hash = hash
