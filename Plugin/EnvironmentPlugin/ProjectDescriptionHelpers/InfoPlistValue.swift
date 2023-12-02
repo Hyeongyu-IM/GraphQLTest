@@ -8,6 +8,7 @@
 import ProjectDescription
 
 public let infoPlistValues: [String: InfoPlist.Value] = [
+    "CFBundleName": "마미톡쇼핑몰",
     "UILaunchStoryboardName": "LaunchScreen",
     "UIApplicationSceneManifest": [
         "UIApplicationSupportsMultipleScenes": false,
