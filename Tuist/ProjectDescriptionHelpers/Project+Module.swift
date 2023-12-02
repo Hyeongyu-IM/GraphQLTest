@@ -37,7 +37,7 @@ public extension Project {
                 "MARKETING_VERSION": SettingValue(stringLiteral: env.appVersion),
                 "CURRENT_PROJECT_VERSION": "1"
             ]
-            let settings: SettingsDictionary = .baseSettings
+            let settings: SettingsDictionary = .appSettings
                 .merging(versionSetting)
                 .merging(.codeSign)
                 .setProvisioning()
@@ -169,7 +169,8 @@ extension Project {
                 configuration: .debug,
                 options: .options(coverage: true, codeCoverageTargets: ["\(env.name)"])
             ),
-            runAction: .runAction(configuration: .debug),
+            runAction: .runAction(configuration: .debug,
+                                  arguments: .init(environment: ["OS_ACTIVITY_MODE": "disable"])),
             archiveAction: .archiveAction(configuration: .release),
             profileAction: .profileAction(configuration: .debug),
             analyzeAction: .analyzeAction(configuration: .debug)

@@ -22,8 +22,10 @@ let dependencies = Dependencies(
                 .Nimble
             ],
             productTypes: [
+                "Kingfisher" : .framework,
                 "GraphQLAPI" : .framework,
-                "GraphQLAPIMock" : .framework
+                "GraphQLAPIMock" : .framework,
+                "CombineCocoa" : .framework
             ],
             baseSettings: .settings(configurations: [
                 .debug(name: .debug),
