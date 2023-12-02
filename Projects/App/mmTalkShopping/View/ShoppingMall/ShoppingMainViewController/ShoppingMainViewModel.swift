@@ -6,4 +6,52 @@
 //  Copyright © 2023 com.hyeongyu. All rights reserved.
 //
 
-import Foundation
+import Combine
+
+import Domain
+
+public final class ShoppingMainViewModel {
+    public struct Input {
+        let viewDidLoad: AnyPublisher<Void, Never>
+    }
+    
+    public struct Output {
+        let productList: PassthroughSubject<[ProductModel], Never> = .init()
+        let errorMessage: PassthroughSubject<String, Never> = .init()
+    }
+    
+    //MARK: -- Dependency
+    private let shoppingMainUsecase: ShoppingMainUseCase
+    
+    private var cancelBag: Set<AnyCancellable> = .init()
+    
+    //MARK: -- init()
+    public init(useCase: ShoppingMainUseCase) {
+        self.shoppingMainUsecase = useCase
+    }
+    
+    //MARK: -- Public
+    
+    public func transform(input: Input) -> Output {
+        let output = Output()
+        self.bindOutput(output: output)
+        
+        return output
+    }
+    
+    public func bindOutput(output: Output) {
+        self.shoppingMainUsecase
+            .productList
+            .sink(receiveValue: { data in
+                output.productList.send(data)
+            })
+            .store(in: &cancelBag)
+        
+        self.shoppingMainUsecase
+            .mainErrorOccurred
+            .sink(receiveValue: { error in
+                output.errorMessage.send(error.localizedDescription)
+            })
+            .store(in: &cancelBag)
+    }
+}
