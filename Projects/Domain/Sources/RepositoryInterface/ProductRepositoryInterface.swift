@@ -11,7 +11,7 @@ import Foundation
 import Combine
 import GraphQLAPI
 
-public protocol LebbarMarketRepositoryInterface: AnyObject {
+public protocol ProductRepositoryInterface: AnyObject {
     func fetchProduct(hash: String) -> AnyPublisher<ProductModel, Error>
     func fetchProductList(listOption: ProductListOptions) -> AnyPublisher<ProductListModel, Error>
 }
