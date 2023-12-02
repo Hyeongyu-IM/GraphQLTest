@@ -34,5 +34,9 @@ public struct MetaModel {
         self.limit = limit
         self.isFinal = isFinal
     }
+    
+    public mutating func plusOnePage() {
+        self.offset += 1
+    }
 }
 
