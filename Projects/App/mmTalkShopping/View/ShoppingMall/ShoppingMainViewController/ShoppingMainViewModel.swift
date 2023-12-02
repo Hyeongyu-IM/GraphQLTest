@@ -13,10 +13,13 @@ import Domain
 public final class ShoppingMainViewModel {
     public struct Input {
         let viewDidLoad: AnyPublisher<Void, Never>
+        let preFetchRequest: AnyPublisher<[Int], Never>
+        let selectProduct: AnyPublisher<Int, Never>
     }
     
     public struct Output {
         let productList: PassthroughSubject<[ProductModel], Never> = .init()
+        let showProductDetailVC: PassthroughSubject<ProductModel, Never> = .init()
         let errorMessage: PassthroughSubject<String, Never> = .init()
     }
     
@@ -36,6 +39,26 @@ public final class ShoppingMainViewModel {
         let output = Output()
         self.bindOutput(output: output)
         
+//        Publishers.Merge(input.viewDidLoad,
+//                         input.preFetchRequest)
+        input.viewDidLoad
+            .sink(receiveValue: {
+                self.shoppingMainUsecase.fetchProductList()
+            })
+            .store(in: &cancelBag)
+        
+        input.preFetchRequest
+            .sink(receiveValue: {
+                self.shoppingMainUsecase.prefetching($0)
+            })
+            .store(in: &cancelBag)
+        
+        input.selectProduct
+            .sink(receiveValue: {
+                self.shoppingMainUsecase.selectModel($0)
+            })
+            .store(in: &cancelBag)
+        
         return output
     }
     
@@ -44,6 +67,13 @@ public final class ShoppingMainViewModel {
             .productList
             .sink(receiveValue: { data in
                 output.productList.send(data)
+            })
+            .store(in: &cancelBag)
+        
+        self.shoppingMainUsecase
+            .showProductDetailVC
+            .sink(receiveValue: {
+                output.showProductDetailVC.send($0)
             })
             .store(in: &cancelBag)
         

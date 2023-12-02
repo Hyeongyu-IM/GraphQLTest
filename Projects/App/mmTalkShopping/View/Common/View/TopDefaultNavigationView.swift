@@ -36,13 +36,21 @@ public final class TopNavigationDefault: UIView {
     }
     
     //MARK: -- UI
+    private lazy var horizonStackView: UIStackView = .init(arrangedSubviews: [
+        backButton,
+        titleLabel
+    ]).then {
+        $0.axis = .horizontal
+        $0.spacing = 0
+        $0.distribution = .equalSpacing
+    }
     private let backButtonImageView: UIImageView = .init()
     private let backButton: UIButton = .init().then {
         $0.tintColor = .black
     }
     
     private let titleLabel: UILabel = .init().then {
-        $0.font = .boldSystemFont(ofSize: 20)
+        $0.font = .systemFont(ofSize: 24, weight: .heavy)
         $0.textAlignment = .left
     }
     
@@ -77,9 +85,9 @@ public final class TopNavigationDefault: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override var intrinsicContentSize: CGSize {
+    override public var intrinsicContentSize: CGSize {
         var size = super.intrinsicContentSize
-        size.height = 56
+        size.height = 50
         return size
     }
 }
@@ -88,6 +96,7 @@ public final class TopNavigationDefault: UIView {
 extension TopNavigationDefault {
     private func setAttribute() {
         self.titleLabel.text = type.text
+        self.backButton.isHidden = type.image == nil
         self.backButtonImageView.image = type.image
     }
     
@@ -102,26 +111,22 @@ extension TopNavigationDefault {
 
 extension TopNavigationDefault {
     private func setView() {
-        self.addSubview(backButton)
-        self.addSubview(titleLabel)
+        self.addSubview(horizonStackView)
+        
+        horizonStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.width.equalTo(50)
+        }
         
         backButton.addSubview(backButtonImageView)
         
-        backButton.snp.makeConstraints {
-            $0.height.equalToSuperview()
-            $0.width.equalToSuperview().multipliedBy(0.3)
-            $0.leading.equalToSuperview()
-            $0.centerY.equalToSuperview()
-        }
         backButtonImageView.snp.makeConstraints {
             $0.width.height.equalTo(24)
             $0.leading.equalToSuperview().offset(12)
             $0.centerY.equalToSuperview()
-        }
-        
-        titleLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(48)
         }
     }
 }

@@ -28,9 +28,10 @@ public final class ShoppingProductItemCVC: UICollectionViewCell {
     private lazy var verticalStackView: UIStackView = .init(arrangedSubviews: [
         brandNameLabel,
         productNameLabel,
+        originPrice,
         subContentStackView,
         reviewScoreAndCountLabel,
-        tagHorizonStackView
+        tagContainerView
     ]).then {
         $0.axis = .vertical
         $0.spacing = 5
@@ -39,14 +40,16 @@ public final class ShoppingProductItemCVC: UICollectionViewCell {
     
     private let brandNameLabel: UILabel = .init().then {
         $0.font = .systemFont(ofSize: 12)
-        $0.textColor = .systemGray3
+        $0.textColor = .systemGray
     }
     
     private let productNameLabel: UILabel = .init().then {
-        $0.font = .systemFont(ofSize: 15)
+        $0.font = .systemFont(ofSize: 15, weight: .semibold)
         $0.numberOfLines = 2
         $0.lineBreakMode = .byTruncatingTail
     }
+    
+    private let originPrice: UILabel = .init()
     
     private lazy var subContentStackView: UIStackView = .init(arrangedSubviews: [
         discountLabel,
@@ -57,11 +60,12 @@ public final class ShoppingProductItemCVC: UICollectionViewCell {
         $0.distribution = .fill
     }
         private let discountLabel: UILabel = .init().then {
-            $0.font = .boldSystemFont(ofSize: 20)
+            $0.font = .systemFont(ofSize: 20, weight: .heavy)
+            $0.textColor = UIColor(hexString: "#FF6969")
             $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         }
         private let priceLabel: UILabel = .init().then {
-            $0.font = .boldSystemFont(ofSize: 20)
+            $0.font = .systemFont(ofSize: 20, weight: .heavy)
             $0.setContentHuggingPriority(.defaultLow, for: .horizontal)
         }
     
@@ -69,11 +73,13 @@ public final class ShoppingProductItemCVC: UICollectionViewCell {
         $0.isHidden = true
     }
     
+    private let tagContainerView: UIView = .init()
     private let tagHorizonStackView: UIStackView = .init().then {
         $0.axis = .horizontal
         $0.spacing = 10
         $0.distribution = .equalSpacing
         $0.isHidden = true
+        $0.alignment = .leading
     }
     
     private var downloadTask: DownloadTask?
@@ -88,14 +94,18 @@ public final class ShoppingProductItemCVC: UICollectionViewCell {
     }
     
     public override func prepareForReuse() {
-        super.prepareForReuse()
         downloadTask?.cancel()
         tagHorizonStackView.removeFullyAllArrangedSubviews()
+        super.prepareForReuse()
     }
     
     func setData(data: ProductModel) {
+        self.downloadTask = productImageView.setImage(with: data.imgUrl ?? "")
+        
         brandNameLabel.text = data.brand
         productNameLabel.text = data.name
+        originPrice.attributedText = "\(Int(data.normalPrc).withComma)원"
+            .strikeThrough(.systemGray3)
         discountLabel.text = "\(data.discountRate)%"
         priceLabel.text = Int(data.sellPrc).withComma
         reviewScoreAndCountLabel.isHidden = data.reviewCount == 0
@@ -116,6 +126,7 @@ extension ShoppingProductItemCVC {
     private func setView() {
         self.contentView.addSubview(productImageView)
         self.contentView.addSubview(verticalStackView)
+        self.tagContainerView.addSubview(tagHorizonStackView)
         
         productImageView.snp.makeConstraints { make in
             make.height.equalTo(productImageView.snp.width)
@@ -126,6 +137,10 @@ extension ShoppingProductItemCVC {
         verticalStackView.snp.makeConstraints { make in
             make.top.equalTo(productImageView.snp.bottom).offset(10)
             make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        tagHorizonStackView.snp.makeConstraints { make in
+            make.top.leading.bottom.equalToSuperview()
         }
     }
 }
