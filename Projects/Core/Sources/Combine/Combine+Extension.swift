@@ -8,9 +8,9 @@
 
 import Combine
 
-extension Publisher {
+public extension Publisher {
     ///Rxswift Throttle
-    public func coolDown<S: Scheduler>(for cooltime: S.SchedulerTimeType.Stride,
+    func coolDown<S: Scheduler>(for cooltime: S.SchedulerTimeType.Stride,
                                 scheduler: S) -> some Publisher<Self.Output, Self.Failure> {
         return self.receive(on: scheduler)
             .scan((S.SchedulerTimeType?.none, Self.Output?.none)) {
@@ -29,5 +29,17 @@ extension Publisher {
                 return (eventTime, $1)
             }
             .compactMap { $0.1 }
+    }
+    
+    func flatMapLatest<P: Publisher>(_ transform: @escaping (Output) -> P) -> Publishers.SwitchToLatest<P, Publishers.Map<Self, P>> {
+        map(transform).switchToLatest()
+    }
+    
+    func mapToVoid() -> Publishers.Map<Self, Void> {
+        map { _ in () }
+    }
+    
+    func mapToValue<Value>(_ value: Value) -> Publishers.Map<Self, Value> {
+        map { _ in value }
     }
 }

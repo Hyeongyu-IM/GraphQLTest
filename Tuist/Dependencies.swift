@@ -13,6 +13,8 @@ let dependencies = Dependencies(
             [
                 .SnapKit,
                 .Kingfisher,
+                .CombineCocoa,
+                .CombineDataSource,
                 .Then,
                 .Apollo,
                 .GraphQLAPI,
