@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+public extension NSObject {
+    var theClassName: String {
+        return NSStringFromClass(type(of: self))
+    }
+}
