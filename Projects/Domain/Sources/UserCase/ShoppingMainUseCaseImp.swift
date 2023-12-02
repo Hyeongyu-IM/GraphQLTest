@@ -15,9 +15,12 @@ import GraphQLAPI
 
 public protocol ShoppingMainUseCase {
     var productList: CurrentValueSubject<[ProductModel], Never> { get }
+    var showProductDetailVC: PassthroughSubject<ProductModel, Never> { get }
     var mainErrorOccurred: PassthroughSubject<Error, Never> { get }
     
     func fetchProductList()
+    func prefetching(_ indexPaths: [Int])
+    func selectModel(_ selectIndex: Int)
 }
 
 public final class ShoppingMainUseCaseImp {
@@ -29,6 +32,7 @@ public final class ShoppingMainUseCaseImp {
     
     //MARK: -- Public
     public let productList: CurrentValueSubject<[ProductModel], Never> = .init([])
+    public var showProductDetailVC: PassthroughSubject<ProductModel, Never> = .init()
     public let mainErrorOccurred: PassthroughSubject<Error, Never> = .init()
     
     //MARK: -- init()
@@ -39,10 +43,16 @@ public final class ShoppingMainUseCaseImp {
 
 extension ShoppingMainUseCaseImp: ShoppingMainUseCase {
     public func fetchProductList() {
+        if let productListMetaModel,
+           productListMetaModel.isFinal == false {
+            self.productListMetaModel?.plusOnePage()
+        }
+        
         Just(productListMetaModel)
             .replaceNil(with: MetaModel.init(offset: 0, limit: 20, isFinal: false))
             .filter { $0.isFinal == false }
             .map { ProductListOptions(offset: $0.offset, limit: $0.limit) }
+            .removeDuplicates()
             .flatMap(productRepository.fetchProductList)
             .sink(receiveCompletion: { [weak self] event in
                 if case Subscribers.Completion.failure = event {
@@ -55,4 +65,18 @@ extension ShoppingMainUseCaseImp: ShoppingMainUseCase {
             })
             .store(in: &cancellable)
     }
+    
+    public func prefetching(_ indexPaths: [Int]) {
+        guard let currentPage = self.productListMetaModel?.offset else { return }
+        let limitIndexRow = (currentPage + 1) * 20 - 10
+        if indexPaths.contains(where: { limitIndexRow > $0 }) == true {
+            fetchProductList()
+        }
+    }
+    
+    public func selectModel(_ selectIndex: Int) {
+        guard let selectItem = self.productList.value[safeIndex: selectIndex] else { return }
+        self.showProductDetailVC.send(selectItem)
+    }
+    
 }
