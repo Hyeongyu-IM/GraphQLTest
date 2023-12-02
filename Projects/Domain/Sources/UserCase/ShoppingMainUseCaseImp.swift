@@ -50,7 +50,7 @@ extension ShoppingMainUseCaseImp: ShoppingMainUseCase {
                 }
             }, receiveValue: { [weak self] model in
                 self?.productListMetaModel = model.meta
-                let currentValue = self?.productList.value
+                let currentValue = self?.productList.value ?? []
                 self?.productList.send(currentValue + model.products)
             })
             .store(in: &cancellable)

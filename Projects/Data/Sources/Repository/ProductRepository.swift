@@ -17,7 +17,7 @@ import GraphQLAPI
 public final class ProductRepository {
     let productRepositoryProvider: ProductProviderInterface
     
-    public init(productRepositoryProvider: ProductProviderInterface = ProductProvider()) {
+    public init(productRepositoryProvider: ProductProviderInterface) {
         self.productRepositoryProvider = productRepositoryProvider
     }
 }
