@@ -40,7 +40,6 @@ public extension Project {
             let settings: SettingsDictionary = .appSettings
                 .merging(versionSetting)
                 .merging(.codeSign)
-                .setProvisioning()
             
             let target = Target(
                 name: name,

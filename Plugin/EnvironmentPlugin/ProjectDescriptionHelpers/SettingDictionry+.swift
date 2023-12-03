@@ -19,9 +19,4 @@ public extension SettingsDictionary {
                                "$(SRCROOT)/../../Tuist/Dependencies/SwiftPackageManager/.build/checkouts/CombineCocoa/Sources/Runtime/include",
                                 "$(SRCROOT)/../../Tuist/Dependencies/SwiftPackageManager/.build/checkouts/CombineCocoa/Sources/CombineCocoa"]
     ]
-    
-    func setProvisioning() -> SettingsDictionary {
-        merging(["PROVISIONING_PROFILE_SPECIFIER": SettingValue(stringLiteral: "$(APP_PROVISIONING_PROFILE)")])
-            .merging(["PROVISIONING_PROFILE": SettingValue(stringLiteral: "$(APP_PROVISIONING_PROFILE)")])
-    }
 }
