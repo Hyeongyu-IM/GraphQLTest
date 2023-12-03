@@ -13,11 +13,18 @@ public extension TargetDependency {
 }
 
 public extension TargetDependency.SPM {
+    //MARK: -- APP
     static let SnapKit = TargetDependency.external(name: "SnapKit")
     static let Kingfisher = TargetDependency.external(name: "Kingfisher")
+    
+    static let CombineCocoa = TargetDependency.external(name: "CombineCocoa")
+    static let CombineDataSource = TargetDependency.external(name: "CombineDataSources")
+    
     static let Then = TargetDependency.external(name: "Then")
+    
     static let Apollo = TargetDependency.external(name: "Apollo")
     static let GraphQLAPI = TargetDependency.external(name: "GraphQLAPI")
+    static let GraphQLAPIMock = TargetDependency.external(name: "GraphQLAPIMock")
     
     //MARK: -- UnitTest Only
     static let Quick = TargetDependency.external(name: "Quick")
@@ -30,6 +37,12 @@ public extension Package {
                                         requirement: .upToNextMajor(from: "5.6.0"))
     static let Kingfisher = Package.remote(url: "https://github.com/onevcat/Kingfisher.git",
                                            requirement: .upToNextMajor(from: "7.9.1"))
+    
+    //MARK: -- Combine
+    static let CombineCocoa = Package.remote(url: "https://github.com/CombineCommunity/CombineCocoa.git",
+                                             requirement: .upToNextMajor(from: "0.4.1"))
+    static let CombineDataSource = Package.remote(url: "https://github.com/combineopensource/CombineDataSources",
+                                             requirement: .upToNextMajor(from: "0.2.5"))
     
     //MARK: -- Util
     static let Then = Package.remote(url: "https://github.com/devxoul/Then.git",

@@ -8,17 +8,13 @@
 
 import Foundation
 
-import ThirdPartyLibs
+import Core
 
 import Apollo
 import ApolloAPI
 
 final class AuthorizationInterceptor: ApolloInterceptor {
-    var id: String
-
-    init(id: String = "AuthorizationInterceptor") {
-        self.id = id
-    }
+    var id: String = UUID().uuidString
     
     func interceptAsync<Operation: GraphQLOperation>(
         chain: RequestChain,
@@ -26,7 +22,7 @@ final class AuthorizationInterceptor: ApolloInterceptor {
         response: HTTPResponse<Operation>?,
         completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
             
-            request.addHeader(name: "Authorization", value: "Bearer 2G8QgQ5RCM")
+            request.addHeader(name: "Authorization", value: "Bearer \(String.APIKey)")
             
             chain.proceedAsync(request: request,
                                response: response,

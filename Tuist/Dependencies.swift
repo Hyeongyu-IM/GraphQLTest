@@ -13,6 +13,8 @@ let dependencies = Dependencies(
             [
                 .SnapKit,
                 .Kingfisher,
+                .CombineCocoa,
+                .CombineDataSource,
                 .Then,
                 .Apollo,
                 .GraphQLAPI,
@@ -20,7 +22,10 @@ let dependencies = Dependencies(
                 .Nimble
             ],
             productTypes: [
-                "GraphQLAPI" : .framework
+                "Kingfisher" : .framework,
+                "GraphQLAPI" : .framework,
+                "GraphQLAPIMock" : .framework,
+                "CombineCocoa" : .framework
             ],
             baseSettings: .settings(configurations: [
                 .debug(name: .debug),

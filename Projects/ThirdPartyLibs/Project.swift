@@ -8,8 +8,11 @@ let project = Project.makeModule(
     externalDependencies: [
         .SPM.Kingfisher,
         .SPM.SnapKit,
+        .SPM.CombineCocoa,
+        .SPM.CombineDataSource,
         .SPM.Then,
         .SPM.Apollo,
-        .SPM.GraphQLAPI
+        .SPM.GraphQLAPI,
+        .SPM.GraphQLAPIMock
     ]
 )
