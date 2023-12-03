@@ -42,13 +42,13 @@
 ### 프로젝트 아키텍처
 
  <p align="center">
-![mmTalk-%E1%84%91%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%B5-2](https://github.com/Hyeongyu-IM/mmTalkShopping/assets/64323969/2a791475-cc77-4d77-bc88-a8a68c58dfa4)
+  <img width="600" alt="%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-12-03_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6 05 31" src="https://github.com/Hyeongyu-IM/mmTalkShopping/assets/64323969/2a791475-cc77-4d77-bc88-a8a68c58dfa4">
  </p>
 
 ### TestCode
 
  <p align="center">
-<img width="947" alt="%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-12-03_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6 05 31" src="https://github.com/Hyeongyu-IM/mmTalkShopping/assets/64323969/e174753b-fdef-4ad2-964c-a4e40b70f61a">
+<img width="600" alt="%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-12-03_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6 05 31" src="https://github.com/Hyeongyu-IM/mmTalkShopping/assets/64323969/e174753b-fdef-4ad2-964c-a4e40b70f61a">
  </p>
 
 TestCode는 Quick과 Nimble을 사용해서 BDD(Behavior Driven Development) 유저의 행동을 중심으로 ViewModel의 Input, Output을 검증하고자 했습니다. 다른 모듈들도 테스트를 해야하는게 좋지만 ViewModel위주로 작성해 보았습니다.
@@ -79,12 +79,13 @@ TestCode는 Quick과 Nimble을 사용해서 BDD(Behavior Driven Development) 유
 
 사실 힘들었던 두가지 이유말고는 어려운 부분이 크게 없었습니다. 
 
-이번에 Apollo를 적용했던 이유는 과제문서와 우대사항에도 적혀있어서 회사 실제 프로젝트에는 사용하고 있을수도 있다는 생각에 미리 한번 사용해 보자고 생각했었습니다.
-하면 되겠지!라는 생각이었지만 막상 라이브러리에 추가하고 cli추가, mockData, Scheme추가하는 부분까지 하나하나 한번에 넘어간게 없어서 이제라도 돌아가야되나 생각했지만 결국 잘되어서 정말 뿌듯한것 같습니다.
+이번에 Apollo를 적용했던 이유는 과제문서와 우대사항에도 적혀있어서 회사 실제 프로젝트에는 사용하고 있을수도 있다는 생각에 미리 한번 사용해 보자고 생각하게 되었습니다.
+하면 되겠지! 라는 생각이었지만 막상 라이브러리에 추가하고 cli추가, mockData, Scheme추가하는 부분까지 하나하나 한번에 넘어간게 없어 이제라도 돌아가야되나 생각했지만 결국 잘되어서 정말 뿌듯하였습니다.
 
-그리고 우대사항 두가지중 하나였던 UnitTest는 보는 순간 꼭 해야겠다고 생각했었습니다.
-저는 테스터블한 코드가 코드를 작성함에 있어서 가장 중요하다고 생각하기 때문입니다.
+그리고 우대사항 두가지중 하나였던 UnitTest는 테스터블한 코드가 코드를 작성함에 있어서 가장 중요하다고 생각하기 때문에 과제 요구사항에는 없었지만 작성해보았습니다.
+
+한가지 혼동스러웠던 부분은 과제 선택사항에 뷰 캐시 처리가 있었는데 이부분이 CollectionView dequeueReusable을 뜻하는지 imageCache를 뜻하는지가 좀 모호했었습니다.
+이미지 캐시는 KingFiser에서 memoryCache만을 이용하도록 설정해 두었습니다. 쇼핑몰의 상품들은 이미지가 워낙 다채롭고 순서의 변화도 크기때문에 디스크 캐시에 저장해두기 보다는 앱을 끄면 날라가는 메모리가 적절하다고 생각했습니다.
 
 새롭게 GraphQL을 이용하면서 흥미로운 점도 많이 있었고, 백엔드 데이터 모델에 hash값이 있어서 item Hashble을 쉽게 만들수 있는 부분도 너무 좋았습니다.
-
 이번에 하면서 아쉬웠던 점은 ViewControllerBuilder를 사용해 실제 구현체를 참조해야하는 부분을 싱글톤으로 만들게 되었었는데 Coordinator와 화면을 Feature모듈 형태로 나누어서 구현했으면 어땟을까 하는 아쉬움이 있었습니다.
