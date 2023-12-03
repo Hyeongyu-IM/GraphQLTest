@@ -39,8 +39,6 @@ public final class ShoppingMainViewModel {
         let output = Output()
         self.bindOutput(output: output)
         
-//        Publishers.Merge(input.viewDidLoad,
-//                         input.preFetchRequest)
         input.viewDidLoad
             .sink(receiveValue: {
                 self.shoppingMainUsecase.fetchProductList()
@@ -61,8 +59,10 @@ public final class ShoppingMainViewModel {
         
         return output
     }
-    
-    public func bindOutput(output: Output) {
+}
+
+extension ShoppingMainViewModel {
+    private func bindOutput(output: Output) {
         self.shoppingMainUsecase
             .productList
             .sink(receiveValue: { data in

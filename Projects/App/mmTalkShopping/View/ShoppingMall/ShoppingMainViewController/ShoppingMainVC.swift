@@ -30,23 +30,22 @@ public final class ShoppingMainVC: BaseViewController {
         $0.register(ShoppingProductItemCVC.self, forCellWithReuseIdentifier: ShoppingProductItemCVC.registerID)
         $0.prefetchDataSource = self
     }
-    
-    private lazy var shoppingProductCellLayout: UICollectionViewCompositionalLayout = {
-       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                             heightDimension: .estimated(245.5))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .estimated(281.5))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                     subitems: [item])
-        group.interItemSpacing = .fixed(16)
-        group.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 36
-        section.contentInsets = .init(top: 20, leading: 0, bottom: 40, trailing: 0)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
-    }()
+        private lazy var shoppingProductCellLayout: UICollectionViewCompositionalLayout = {
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+                                                heightDimension: .estimated(245.5))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                heightDimension: .estimated(281.5))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                        subitems: [item])
+            group.interItemSpacing = .fixed(16)
+            group.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
+            let section = NSCollectionLayoutSection(group: group)
+            section.interGroupSpacing = 36
+            section.contentInsets = .init(top: 20, leading: 0, bottom: 40, trailing: 0)
+            let layout = UICollectionViewCompositionalLayout(section: section)
+            return layout
+        }()
     
     //MARK: ViewModel
     private let viewModel: ShoppingMainViewModel
@@ -83,6 +82,7 @@ extension ShoppingMainVC {
         let output = self.viewModel.transform(input: input)
         
         output.productList
+            .receive(on: DispatchQueue.main)
             .bind(subscriber: collectionView.itemsSubscriber(cellIdentifier: ShoppingProductItemCVC.registerID,
                                                              cellType: ShoppingProductItemCVC.self,
                                                              cellConfig: { cellType, index, model in
@@ -91,8 +91,10 @@ extension ShoppingMainVC {
             .store(in: &cancelBag)
         
         output.showProductDetailVC
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] model in
-                print("selectModel \(model)")
+                let detailVC = ViewControllerBuilder.shared.shoppingProductDetailVC(model)
+                self?.navigationController?.pushViewController(detailVC, animated: true)
             })
             .store(in: &cancelBag)
         
@@ -112,6 +114,7 @@ extension ShoppingMainVC: UICollectionViewDataSourcePrefetching {
     }
 }
 
+//MARK: -- SetView
 extension ShoppingMainVC {
     private func setView() {
         self.view.addSubview(topNaviView)

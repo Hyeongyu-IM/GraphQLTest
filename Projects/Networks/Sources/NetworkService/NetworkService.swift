@@ -31,22 +31,4 @@ public final class NetworkService {
     }()
     
     public init() { }
-    
-    var product: ProductQuery.Data.Product?
-    
-    public func fetchProductList() {
-        let query = ProductQuery(hash: "73BC8649785CC47660AE5DC3B802CDA6")
-        client.fetch(query: query) { result in
-            switch result {
-            case .success(let value):
-                self.product = value.data?.product
-                if let data = value.data {
-                    print(dump(data.product))
-                    print("데이터 들어옴")
-                }
-            case .failure(let error):
-                debugPrint(error.localizedDescription)
-            }
-        }
-    }
 }

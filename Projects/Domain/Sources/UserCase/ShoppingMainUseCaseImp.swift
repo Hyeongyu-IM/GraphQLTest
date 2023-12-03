@@ -30,9 +30,9 @@ public final class ShoppingMainUseCaseImp {
     
     private var productListMetaModel: MetaModel?
     
-    //MARK: -- Public
+    //MARK: -- Output
     public let productList: CurrentValueSubject<[ProductModel], Never> = .init([])
-    public var showProductDetailVC: PassthroughSubject<ProductModel, Never> = .init()
+    public let showProductDetailVC: PassthroughSubject<ProductModel, Never> = .init()
     public let mainErrorOccurred: PassthroughSubject<Error, Never> = .init()
     
     //MARK: -- init()
@@ -49,7 +49,7 @@ extension ShoppingMainUseCaseImp: ShoppingMainUseCase {
         }
         
         Just(productListMetaModel)
-            .replaceNil(with: MetaModel.init(offset: 0, limit: 20, isFinal: false))
+            .replaceNil(with: MetaModel.init(offset: 0, limit: Constants.countPerPage, isFinal: false))
             .filter { $0.isFinal == false }
             .map { ProductListOptions(offset: $0.offset, limit: $0.limit) }
             .removeDuplicates()
@@ -68,7 +68,7 @@ extension ShoppingMainUseCaseImp: ShoppingMainUseCase {
     
     public func prefetching(_ indexPaths: [Int]) {
         guard let currentPage = self.productListMetaModel?.offset else { return }
-        let limitIndexRow = (currentPage + 1) * 20 - 10
+        let limitIndexRow = (currentPage + 1) * Constants.countPerPage - 10
         if indexPaths.contains(where: { limitIndexRow > $0 }) == true {
             fetchProductList()
         }
@@ -78,5 +78,11 @@ extension ShoppingMainUseCaseImp: ShoppingMainUseCase {
         guard let selectItem = self.productList.value[safeIndex: selectIndex] else { return }
         self.showProductDetailVC.send(selectItem)
     }
-    
+}
+
+extension ShoppingMainUseCaseImp {
+    enum Constants {
+        ///API 요청시 한 페이지당 모델의 개수
+        static let countPerPage: Int = 20
+    }
 }
