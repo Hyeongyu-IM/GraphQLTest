@@ -23,7 +23,7 @@ public final class TopNavigationDefault: UIView {
         var image: UIImage? {
             switch self {
             case .title: return nil
-            case .pop: return .init(systemName: "chevron.backward")
+            case .pop: return .init(systemName: "chevron.left")
             }
         }
         
@@ -44,10 +44,11 @@ public final class TopNavigationDefault: UIView {
         $0.spacing = 0
         $0.distribution = .equalSpacing
     }
-    private let backButtonImageView: UIImageView = .init()
-    private let backButton: UIButton = .init().then {
+    private let backButtonImageView: UIImageView = .init().then {
+        $0.contentMode = .scaleAspectFit
         $0.tintColor = .black
     }
+    private let backButton: UIButton = .init()
     
     private let titleLabel: UILabel = .init().then {
         $0.font = .systemFont(ofSize: 24, weight: .heavy)
@@ -124,8 +125,9 @@ extension TopNavigationDefault {
         backButton.addSubview(backButtonImageView)
         
         backButtonImageView.snp.makeConstraints {
-            $0.width.height.equalTo(24)
-            $0.leading.equalToSuperview().offset(12)
+            $0.width.equalTo(20)
+            $0.height.equalTo(30)
+            $0.leading.equalToSuperview().offset(5)
             $0.centerY.equalToSuperview()
         }
     }

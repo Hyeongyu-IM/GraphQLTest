@@ -16,4 +16,12 @@ extension ViewControllerBuilder {
         let viewModel = ShoppingMainViewModel(useCase: shoppingMainUseCase)
         return ShoppingMainVC(viewModel: viewModel)
     }
+    
+    func shoppingProductDetailVC(_ selectProduct: ProductModel) -> ShoppingProductDetailVC {
+        let shoppingProductDetailUseCase = ShoppingProductDetailUseCaseImp(
+            productRepositoryInterface: productRepository,
+            productID: selectProduct.hash)
+        let viewModel = ShoppingProductDetailViewModel(shoppingProductDetailUseCase: shoppingProductDetailUseCase)
+        return ShoppingProductDetailVC(viewModel: viewModel)
+    }
 }
