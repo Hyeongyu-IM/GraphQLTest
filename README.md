@@ -1,5 +1,5 @@
-# 안녕하세요 
-코드를 요리하는 iOS 지원자 임현규 입니다
+# 코드를 요리하는 iOS 지원자 임현규 입니다
+
  <p align="center">
   <img src="https://github.com/Hyeongyu-IM/mmTalkShopping/assets/64323969/9af746aa-228d-4454-92e0-7684b64fe7cc" width="500" height="500">
  </p> 
