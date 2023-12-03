@@ -24,14 +24,16 @@ public final class MaintabBarController: UITabBarController {
         
         var image: UIImage? {
             switch self {
-            case .shopping: return UIImage(systemName: "basket")
+            case .shopping: 
+                return MmTalkShoppingAsset.shoppingBagOff.image
             case .myPage: return UIImage(systemName: "person")
             }
         }
         
         var selectedImage: UIImage? {
             switch self {
-            case .shopping: return UIImage(systemName: "basket.fill")
+            case .shopping: 
+                return MmTalkShoppingAsset.shoppingBagOn.image
             case .myPage: return UIImage(systemName: "person.fill")
             }
         }
@@ -45,7 +47,7 @@ public final class MaintabBarController: UITabBarController {
     
     public init() {
         shoppingMainVC = vcBuilder.shoppingMainVC()
-        myPageVC = .init()
+        myPageVC = vcBuilder.myPageVC()
         super.init(nibName: nil, bundle: nil)
         setAttribute()
         setControllers()
@@ -65,7 +67,7 @@ extension MaintabBarController {
                                createTabBarItem(title: TabBar.myPage.title,
                                                 image: TabBar.myPage.image,
                                                 selectedImage: TabBar.myPage.selectedImage,
-                                                viewController: .init())]
+                                                viewController: myPageVC)]
         setViewControllers(viewControllers, animated: false)
     }
     

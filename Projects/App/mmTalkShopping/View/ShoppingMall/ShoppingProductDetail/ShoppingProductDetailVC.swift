@@ -15,7 +15,7 @@ import Then
 import SnapKit
 
 public final class ShoppingProductDetailVC: BaseViewController {
-    //MARK: UI
+    //MARK: -- UI
     private let topNaviView: TopNavigationDefault = .init(transitionType: .pop("상품 상세보기"))
     
     private let singleLineView: UIView = .init().then {
@@ -28,9 +28,10 @@ public final class ShoppingProductDetailVC: BaseViewController {
         $0.tintColor = .label
     }
     
-    //MARK: ViewModel
+    //MARK: -- ViewModel
     private let viewModel: ShoppingProductDetailViewModel
     
+    //MARK: -- init()
     public init(viewModel: ShoppingProductDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)

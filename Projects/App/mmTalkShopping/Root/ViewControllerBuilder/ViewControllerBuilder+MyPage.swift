@@ -11,5 +11,7 @@ import Core
 import Domain
 
 extension ViewControllerBuilder {
-    
+    func myPageVC() -> MyPageMainVC {
+        return MyPageMainVC()
+    }
 }
