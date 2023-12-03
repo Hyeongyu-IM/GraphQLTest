@@ -23,22 +23,21 @@ public final class ProductReviewStatusView: UIView {
         $0.axis = .horizontal
         $0.distribution = .equalSpacing
     }
-    
-    let starImageView: UIImageView = .init(image: .init(systemName: "star.fill")).then {
-        $0.tintColor = .yellow
-    }
-    
-    let productScoreLabel: UILabel = .init()
-    
-    let singleLineContainerView: UIView = .init()
-    private let singleLineView: UIView = .init().then {
-        $0.backgroundColor = .lightGray
-    }
-    
-    let reviewCountLabel: UILabel = .init().then {
-        $0.font = .systemFont(ofSize: 12)
-        $0.textColor = .lightGray
-    }
+        let starImageView: UIImageView = .init(image: .init(systemName: "star.fill")).then {
+            $0.tintColor = .yellow
+        }
+        
+        let productScoreLabel: UILabel = .init()
+        
+        let singleLineContainerView: UIView = .init()
+        private let singleLineView: UIView = .init().then {
+            $0.backgroundColor = .lightGray
+        }
+        
+        let reviewCountLabel: UILabel = .init().then {
+            $0.font = .systemFont(ofSize: 12)
+            $0.textColor = .lightGray
+        }
     
     private let maxScore: Int
     
@@ -67,15 +66,15 @@ public final class ProductReviewStatusView: UIView {
 
 extension ProductReviewStatusView {
     private func setProductScoreLabel(currentScore: Double, maxScore: Int) {
-        var mutableString: NSMutableAttributedString = .init()
+        let mutableString: NSMutableAttributedString = .init()
         let font = UIFont.systemFont(ofSize: 12)
         
-        var headAttribute: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.label,
+        let headAttribute: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.label,
                                                             .font: font]
         let currentScoreAtt = NSAttributedString(string: "\(currentScore)",
                                                  attributes: headAttribute)
         
-        var tailAttribute: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.lightGray,
+        let tailAttribute: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.lightGray,
                                                             .font: font]
         let maxScoreAtt = NSAttributedString(string: "/\(maxScore)",
                                                  attributes: tailAttribute)

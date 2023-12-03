@@ -45,6 +45,7 @@ public final class MaintabBarController: UITabBarController {
     private let shoppingMainVC: ShoppingMainVC
     private let myPageVC: UIViewController
     
+    //MARK: -- init()
     public init() {
         shoppingMainVC = vcBuilder.shoppingMainVC()
         myPageVC = vcBuilder.myPageVC()

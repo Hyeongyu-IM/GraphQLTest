@@ -14,19 +14,26 @@ import ApolloTestSupport
 
 extension ProductQuery: QueryType {
     public var sampleData: ProductQuery.Data.Product {
-        let mock = Mock<Product>.init(brand: "|베베원|",
-                                      discountRate: 42,
-                                      hash: "73BC8649785CC47660AE5DC3B802CDA6",
-                                      imgUrl: "https://static.shop.mmtalk.kr/_data/product/202304/06/2037e70a2f00c03ee39925ace336baa5.jpg",
-                                      name: "무형광 순면 사계절 배냇슈트-신생아",
-                                      normalPrc: 108700.0,
-                                      reviewAvg: 0.0,
-                                      reviewCount: 0,
-                                      sellPrc: 62200.0,
-                                      soldOut: false,
-                                      tags: [])
+        let data: [String: Any] = [
+            "product": [
+                "__typename": "Product",
+                "hash": "73BC8649785CC47660AE5DC3B802CDA6",
+                "brand": "|베베원|",
+                "name": "무형광 순면 사계절 배냇슈트-신생아",
+                "sellPrc": 62200,
+                "normalPrc": 108700,
+                "discountRate": 42,
+                "imgUrl": "https://static.shop.mmtalk.kr/_data/product/202304/06/2037e70a2f00c03ee39925ace336baa5.jpg",
+                "reviewAvg": 0,
+                "reviewCount": 0,
+                "tags": [],
+                "soldOut": false
+            ]
+        ]
         
-        return ProductQuery.Data.from(mock).product
+        let mockTestData = try! ProductQuery.Data(data: data,
+                                                  variables: ["hash": "1234567890"])
+        return mockTestData.product
     }
 }
 

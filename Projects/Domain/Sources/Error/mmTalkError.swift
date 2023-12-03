@@ -8,12 +8,14 @@
 
 import Foundation
 
-public enum mmTalkError: Error, LocalizedError {
+public enum mmTalkError: Error {
     case networkError
-    
-    public var errorDescription: String {
+}
+
+extension mmTalkError: LocalizedError {
+    public var errorDescription: String? {
         switch self {
-        case .networkError: 
+        case .networkError:
             return NSLocalizedString("네트워크 오류가 발생했습니다", comment: "networkError")
         }
     }
