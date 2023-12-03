@@ -16,7 +16,7 @@ import GraphQLAPI
 public protocol ShoppingMainUseCase {
     var productList: CurrentValueSubject<[ProductModel], Never> { get }
     var showProductDetailVC: PassthroughSubject<ProductModel, Never> { get }
-    var mainErrorOccurred: PassthroughSubject<Error, Never> { get }
+    var mainErrorOccurred: PassthroughSubject<mmTalkError, Never> { get }
     
     func fetchProductList()
     func prefetching(_ indexPaths: [Int])
@@ -33,7 +33,7 @@ public final class ShoppingMainUseCaseImp {
     //MARK: -- Output
     public let productList: CurrentValueSubject<[ProductModel], Never> = .init([])
     public let showProductDetailVC: PassthroughSubject<ProductModel, Never> = .init()
-    public let mainErrorOccurred: PassthroughSubject<Error, Never> = .init()
+    public let mainErrorOccurred: PassthroughSubject<mmTalkError, Never> = .init()
     
     //MARK: -- init()
     public init(productRepositoryInterface: ProductRepositoryInterface) {

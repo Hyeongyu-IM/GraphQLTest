@@ -15,7 +15,7 @@ import GraphQLAPI
 
 public protocol ShoppingProductDetailUseCase {
     var pageTitle: PassthroughSubject<String, Never> { get }
-    var mainErrorOccurred: PassthroughSubject<Error, Never> { get }
+    var mainErrorOccurred: PassthroughSubject<mmTalkError, Never> { get }
     
     func requestProductData()
 }
@@ -29,7 +29,7 @@ public final class ShoppingProductDetailUseCaseImp {
     
     //MARK: -- Output
     public let pageTitle: PassthroughSubject<String, Never> = .init()
-    public let mainErrorOccurred: PassthroughSubject<Error, Never> = .init()
+    public let mainErrorOccurred: PassthroughSubject<mmTalkError, Never> = .init()
     
     //MARK: -- init()
     public init(productRepositoryInterface: ProductRepositoryInterface,
