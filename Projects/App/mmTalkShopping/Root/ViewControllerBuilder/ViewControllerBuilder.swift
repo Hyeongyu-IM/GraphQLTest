@@ -16,6 +16,4 @@ final class ViewControllerBuilder {
     @Injected var productRepository: ProductRepositoryInterface
     
     private init() {}
-    
-
 }
