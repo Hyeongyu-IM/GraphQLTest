@@ -78,7 +78,9 @@ extension ShoppingMainVC {
             preFetchRequest: self.prefetchRequestSubject.eraseToAnyPublisher(),
             selectProduct: collectionView.didSelectItemPublisher
                 .map(\.row)
+                .coolDown(for: 0.5, scheduler: DispatchQueue.main)
                 .eraseToAnyPublisher())
+        
         let output = self.viewModel.transform(input: input)
         
         output.productList
