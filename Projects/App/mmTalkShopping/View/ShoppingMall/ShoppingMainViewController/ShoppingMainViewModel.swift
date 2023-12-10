@@ -40,20 +40,20 @@ public final class ShoppingMainViewModel {
         self.bindOutput(output: output)
         
         input.viewDidLoad
-            .sink(receiveValue: {
-                self.shoppingMainUsecase.fetchProductList()
+            .sink(receiveValue: { [weak self] _ in
+                self?.shoppingMainUsecase.fetchProductList()
             })
             .store(in: &cancelBag)
         
         input.preFetchRequest
-            .sink(receiveValue: {
-                self.shoppingMainUsecase.prefetching($0)
+            .sink(receiveValue: { [weak self] data in
+                self?.shoppingMainUsecase.prefetching(data)
             })
             .store(in: &cancelBag)
         
         input.selectProduct
-            .sink(receiveValue: {
-                self.shoppingMainUsecase.selectModel($0)
+            .sink(receiveValue: { [weak self] data in
+                self?.shoppingMainUsecase.selectModel(data)
             })
             .store(in: &cancelBag)
         

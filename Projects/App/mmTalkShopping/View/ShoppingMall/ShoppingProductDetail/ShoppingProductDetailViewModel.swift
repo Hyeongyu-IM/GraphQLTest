@@ -39,8 +39,8 @@ public final class ShoppingProductDetailViewModel {
         self.bindOutput(input: input, output: output)
         
         input.viewDidLoad
-            .sink(receiveValue: {
-                self.shoppingProductDetailUseCase.requestProductData()
+            .sink(receiveValue: { [weak self] _ in
+                self?.shoppingProductDetailUseCase.requestProductData()
             })
             .store(in: &cancelBag)
         
