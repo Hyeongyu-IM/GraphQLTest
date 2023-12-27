@@ -6,6 +6,7 @@
 1. [프로젝트 기술 스택](#프로젝트-기술-스택)
 2. [프로젝트 의존성 그래프](#프로젝트-의존성-그래프)
 3. [프로젝트 아키텍처](#프로젝트-아키텍처)
+4. [Unit Test](#Unit-Test)
 
 ### 프로젝트 기술 스택
 
@@ -38,4 +39,9 @@
 
  <p align="center">
   <img width="600" alt="%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-12-03_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6 05 31" src="https://github.com/Hyeongyu-IM/mmTalkShopping/assets/64323969/2a791475-cc77-4d77-bc88-a8a68c58dfa4">
+ </p>
+
+### Unit Test
+ <p align="center">
+  <img width="600" alt="%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-12-03_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6 05 31" src="https://github.com/Hyeongyu-IM/GraphQLTest/assets/64323969/787b0d3e-9c81-4207-ad7d-765a12891547">
  </p>
