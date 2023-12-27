@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 public extension String {
-    static let graphQLURLString: String = "https://assignment.mobile.mmtalk.kr/graphql"
-    static let APIKey: String = "2G8QgQ5RCM"
+    static let graphQLURLString: String = "???"
+    static let APIKey: String = "???"
 }
 
 public extension String {
